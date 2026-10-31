@@ -112,7 +112,7 @@ router.put("/api/edit-user/:id", async (req, res) => {
 router.delete("/api/delete-user/:id", async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
-        res.json(user)
+        // res.json(user)
         if (!user) {
             return res.status(404).send("User not found");
         }
