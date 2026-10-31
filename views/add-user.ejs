@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New User</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f4f7fb;
+            font-family: 'Segoe UI', sans-serif;
+            color: #263248;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #4338ca, #6366f1);
+            color: white;
+            padding: 28px 32px;
+            border-radius: 16px;
+            margin-bottom: 28px;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, .16);
+        }
+
+        .page-header h2 {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .page-header p {
+            color: #e0e7ff;
+            margin: 0;
+        }
+
+        .form-card {
+            background: white;
+            border: none;
+            border-radius: 18px;
+            box-shadow: 0 5px 25px rgba(0,0,0,.05);
+            overflow: hidden;
+        }
+
+        .form-card-header {
+            padding: 23px 28px;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .form-card-header h5 {
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .form-card-body {
+            padding: 30px;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .input-group-text {
+            background: #f8faff;
+            border: 1px solid #e2e8f0;
+            color: #6366f1;
+            border-radius: 9px 0 0 9px;
+            min-width: 43px;
+            justify-content: center;
+        }
+
+        .form-control {
+            border: 1px solid #e2e8f0;
+            padding: 12px 14px;
+            font-size: 14px;
+            border-radius: 0 9px 9px 0;
+            box-shadow: none !important;
+        }
+
+        .form-control:focus {
+            border-color: #818cf8;
+        }
+
+        .form-control::placeholder {
+            color: #a0aabc;
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, #4338ca, #6366f1);
+            color: white;
+            border: none;
+            padding: 13px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .save-btn:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(79,70,229,.2);
+        }
+
+        .back-btn {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 13px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: .2s;
+        }
+
+        .back-btn:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .required {
+            color: #ef4444;
+        }
+
+        @media(max-width: 576px) {
+            .page-header {
+                padding: 23px 20px;
+            }
+
+            .form-card-body {
+                padding: 22px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container py-4 py-md-5">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h2>
+            <i class="bi bi-person-plus-fill me-2"></i>
+            Add New User
+        </h2>
+        <p>Create a new user account by filling in the details below.</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="form-card mx-auto" style="max-width: 750px;">
+
+        <div class="form-card-header">
+            <h5>
+                <i class="bi bi-person-vcard-fill text-primary me-2"></i>
+                User Information
+            </h5>
+            <small class="text-secondary">Please enter the user's details</small>
+        </div>
+
+        <div class="form-card-body">
+
+            <form action="/api/add-user" method="POST">
+
+                <div class="row">
+
+                    <!-- Full Name -->
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label">
+                            Full Name <span class="required">*</span>
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person"></i>
+                            </span>
+                            <input
+                                type="text"
+                                name="name"
+                                class="form-control"
+                                placeholder="Enter full name"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label">
+                            Email Address <span class="required">*</span>
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-envelope"></i>
+                            </span>
+                            <input
+                                type="email"
+                                name="email"
+                                class="form-control"
+                                placeholder="Enter email address"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label">
+                            Phone Number <span class="required">*</span>
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-telephone"></i>
+                            </span>
+                            <input
+                                type="tel"
+                                name="phone"
+                                class="form-control"
+                                placeholder="Enter phone number"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Age -->
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label">
+                            Age <span class="required">*</span>
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-calendar3"></i>
+                            </span>
+                            <input
+                                type="number"
+                                name="age"
+                                class="form-control"
+                                placeholder="Enter age"
+                                min="1"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- City -->
+                    <div class="col-12 mb-4">
+                        <label class="form-label">
+                            City <span class="required">*</span>
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-geo-alt"></i>
+                            </span>
+                            <input
+                                type="text"
+                                name="city"
+                                class="form-control"
+                                placeholder="Enter city name"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr class="my-3">
+
+                <!-- Buttons -->
+                <div class="d-grid gap-3">
+                    <button type="submit" class="btn save-btn">
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                        Save User
+                    </button>
+
+                    <a href="/" class="back-btn">
+                        <i class="bi bi-arrow-left me-2"></i>
+                        Back to Dashboard
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <small class="text-secondary">
+            User Management System · Add User
+        </small>
+    </div>
+
+</div>
+
+</body>
+</html>

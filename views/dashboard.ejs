@@ -1,0 +1,360 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f4f7fb;
+            font-family: 'Segoe UI', sans-serif;
+            color: #263248;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #4338ca, #6366f1);
+            color: white;
+            padding: 35px;
+            border-radius: 18px;
+            margin-bottom: 28px;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, .18);
+        }
+
+        .dashboard-header h2 {
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .dashboard-header p {
+            margin: 0;
+            color: #e0e7ff;
+        }
+
+        .add-btn {
+            background: white;
+            color: #4f46e5;
+            border: none;
+            padding: 11px 19px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: .2s;
+        }
+
+        .add-btn:hover {
+            background: #eef2ff;
+            color: #3730a3;
+            transform: translateY(-2px);
+        }
+
+        .stat-card {
+            background: white;
+            border: none;
+            border-radius: 15px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.04);
+            height: 100%;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 22px;
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .stat-card h3 {
+            font-size: 27px;
+            font-weight: 700;
+            margin: 15px 0 3px;
+        }
+
+        .stat-card p {
+            color: #8993a4;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .users-card {
+            background: white;
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,.04);
+            overflow: hidden;
+        }
+
+        .users-card-header {
+            padding: 23px 25px;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .users-card-header h5 {
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .table {
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .table thead th {
+            background: #f8faff;
+            color: #718096;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+            font-weight: 700;
+            padding: 17px 20px;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .table tbody td {
+            padding: 17px 20px;
+            vertical-align: middle;
+            color: #475569;
+            font-size: 14px;
+            border-color: #f1f3f7;
+        }
+
+        .table tbody tr:hover {
+            background: #fafbff;
+        }
+
+        .user-avatar {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #e0e7ff;
+            color: #4338ca;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: #263248;
+        }
+
+        .action-btn {
+            width: 34px;
+            height: 34px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            border: none;
+            text-decoration: none;
+            font-size: 15px;
+            margin-right: 5px;
+        }
+
+        .edit-btn {
+            background: #fff7e6;
+            color: #d97706;
+        }
+
+        .edit-btn:hover {
+            background: #fef0c7;
+            color: #b45309;
+        }
+
+        .delete-btn {
+            background: #fff0f0;
+            color: #dc2626;
+        }
+
+        .delete-btn:hover {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .empty-state {
+            padding: 55px 20px !important;
+            text-align: center;
+            color: #94a3b8 !important;
+        }
+
+        .empty-state i {
+            font-size: 42px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        @media(max-width: 576px) {
+            .dashboard-header {
+                padding: 24px 20px;
+            }
+
+            .dashboard-header .add-btn {
+                margin-top: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container py-4 py-md-5">
+
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+            <div>
+                <h2><i class="bi bi-grid-1x2-fill me-2"></i>User Dashboard</h2>
+                <p>Manage and monitor all your users in one place.</p>
+            </div>
+
+            <a href="/api/add-user" class="add-btn">
+                <i class="bi bi-plus-circle-fill"></i>
+                Add New User
+            </a>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-3 mb-4">
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <h3><%= users.length %></h3>
+                <p>Total Users</p>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-person-check-fill"></i>
+                </div>
+                <h3><%= users.length %></h3>
+                <p>Registered Users</p>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-geo-alt-fill"></i>
+                </div>
+                <h3><%= new Set(users.map(user => user.city).filter(Boolean)).size %></h3>
+                <p>Unique Cities</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Users Table -->
+    <div class="users-card">
+
+        <div class="users-card-header d-flex justify-content-between align-items-center">
+            <div>
+                <h5><i class="bi bi-people me-2 text-primary"></i>All Users</h5>
+                <small class="text-secondary">View and manage your registered users</small>
+            </div>
+
+            <span class="badge rounded-pill text-bg-primary px-3 py-2">
+                <%= users.length %> Users
+            </span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Age</th>
+                        <th>City</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% users.forEach((user, index) => { %>
+                    <tr>
+                        <td class="text-secondary"><%= index + 1 %></td>
+
+                        <td>
+                            <span class="user-avatar">
+                                <%= user.name ? user.name.charAt(0).toUpperCase() : 'U' %>
+                            </span>
+                            <span class="user-name"><%= user.name %></span>
+                        </td>
+
+                        <td><%= user.email %></td>
+                        <td><%= user.phone %></td>
+                        <td><%= user.age %></td>
+                        <td>
+                            <i class="bi bi-geo-alt text-secondary me-1"></i>
+                            <%= user.city %>
+                        </td>
+
+                        <td>
+                            <a href="/api/edit-user/<%= user._id %>"
+                               class="action-btn edit-btn"
+                               title="Edit User">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+                            <form
+                                action="/api/delete-user/<%= user._id %>?_method=DELETE"
+                                method="POST"
+                                style="display:inline;"
+                                onsubmit="return confirm('Are you sure you want to delete this user?')">
+
+                                <button type="submit"
+                                        class="action-btn delete-btn"
+                                        title="Delete User">
+                                    <i class="bi bi-trash3-fill"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+
+                    <% if (users.length === 0) { %>
+                    <tr>
+                        <td colspan="7" class="empty-state">
+                            <i class="bi bi-person-x"></i>
+                            <h5 class="text-dark">No Users Found</h5>
+                            <p class="mb-3">Start by adding your first user.</p>
+                            <a href="/api/add-user" class="btn btn-primary btn-sm">
+                                <i class="bi bi-plus-lg me-1"></i> Add User
+                            </a>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-4">
+        <small class="text-secondary">User Management System · Dashboard</small>
+    </div>
+
+</div>
+
+</body>
+</html>
