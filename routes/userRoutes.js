@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     try {
         const users = await User.find();
 
-        res.json(users);
+        //res.json(users);
 
         res.render("dashboard", {
             users
@@ -46,7 +46,7 @@ router.post("/api/add-user", async (req, res) => {
                 city
             });
         res.redirect("/");
-        res.json({message : "user created successfully"})
+       // res.json({message : "user created successfully"})
         }
 
     } catch (error) {
@@ -60,7 +60,7 @@ router.get("/api/edit-user/:id", async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
        
-        res.json(user)
+        //res.json(user)
         if (!user) {
             return res.status(404).send("User not found");
         }
